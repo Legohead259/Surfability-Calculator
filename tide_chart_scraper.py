@@ -1,0 +1,1 @@
+# Given a date or range of dates and location, scrape the tidal predictions from NOAA and determine dates with the optimal tides (low, incoming between 0800-1100 ET is ideal)

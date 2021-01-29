@@ -1,0 +1,1 @@
+# Given a date or range of dates and location, scrape for wind predictions and determine if the wind is optimal (light off-shore is best, no wind good, heavy wind or on-shore bad)
