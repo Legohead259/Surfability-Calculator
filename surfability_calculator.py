@@ -2,5 +2,3 @@
 # Updates a Google Calendar with calculated surfability
 
 # Surfability is determined by an algorithm weighting the tidal, wind, and wave factors and their favorabilities returning 0-0.99 confidence rating
-
-# This is testing the GitHub integration

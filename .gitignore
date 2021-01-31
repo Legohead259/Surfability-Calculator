@@ -1,0 +1,8 @@
+# Secrecy
+secrets.py
+
+# Extraneus
+__pycache__/
+
+# Test output files
+*.json
