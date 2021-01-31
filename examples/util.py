@@ -16,5 +16,8 @@ def calculate_wave_score(min, max):
 
     return range_score + height_score / 2  # Average of wave parameter scores
 
-def calculate_tide_score:
-    pass
+def calculate_tide_score(heights, low_tide_in_range=False):
+    if low_tide_in_range:
+        return 1
+
+    return map(sum(heights)/len(heights), max(heights), min(heights), 0, 1)

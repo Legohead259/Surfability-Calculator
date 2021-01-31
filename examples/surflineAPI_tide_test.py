@@ -14,10 +14,28 @@ json_response = response.json()
 text = json.dumps(json_response, sort_keys=True, indent=4)
 # print(text)  # Debug
 
-for wave_data in json_response["data"]["wave"]:
-    print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(wave_data["timestamp"])))  # Print date and time of reading
-    print("Surfline score: " + str(wave_data["surf"]["optimalScore"]))
-    print("Max surf: " + str(wave_data["surf"]["max"]) + " ft")
-    print("Min surf: " + str(wave_data["surf"]["min"]) + " ft")
-    print("Calculated score: " + str(calculate_wave_score(wave_data["surf"]["min"], wave_data["surf"]["max"])))
-    print()  # Blank line
+_low_tide_in_range = False
+_last_day = None
+tide_data = []
+
+for datum in json_response["data"]["tides"]:
+    datetime = time.localtime(datum["timestamp"])
+    # print(time.strftime("%Y-%m-%d %H:%M:%S", datetime))  # Print date and time of reading
+    # print("Height: " + str(datum["height"]) + " ft")
+    # print("Type: " + datum["type"])
+    # print()  # Blank line
+
+    if datetime.tm_hour in range(7, 12)  # Only append tide data for desired period
+        tide_data.append(datum["height"])
+
+    if datetime.tm_hour in range(7, 12) and datum["type"] == 'LOW':
+        _low_tide_in_range = True
+
+    if _last_day == None:
+        _last_day = datetime.tm_mday
+        print(_last_day)  # Debug
+    elif datetime.tm_mday != _last_day:
+        _last_day = datetime.tm_mday
+        print(calculate_tide_score(tide_data, _low_tide_in_range))  # Debug
+        tide_data = []  # reset tide data values for next day
+    
